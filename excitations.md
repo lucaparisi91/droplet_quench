@@ -5,8 +5,7 @@ On can look for solutions of the form
 $$ \phi(r) = e^{-i\mu t}\phi_0(r)\left( \sum_i u_i(r) e^{-i\omega_i t}  + v_i^*(r)e^{i\omega_i t}\right)$$
 Looking for stationary solutions of this form on gets the equations
 
-$$
-\hbar \omega 
+$$\hbar \omega 
 \begin{pmatrix}
 u \\ 
 v
