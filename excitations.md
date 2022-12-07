@@ -38,10 +38,27 @@ $$\hbar\omega=\sqrt{ \left(\frac{\hbar^2k^2}{2m}\right)^2 + \frac{\hbar^2 k^2}{m
 There is not a maximum in the energy spectrum. The formation of droplets cannot be obtained at linear order.
 ## Implementation
 If the hamiltonian is rotationally invariant one can works in spherical coordinates and the hamiltonian becomes $H_0=-\frac{\hbar^2}{2m}\frac{\partial^2 }{\partial^2 r} + \frac{2}{r}\frac{\partial}{\partial r} - \frac{l(l+1)}{r^2}$ with boundary conditions $\partial_r\psi_0(r)=0$ at the boundaries. Makes use of PETSC with MIRROR DM boundary ( to mimic Neumann boundary conditions ). The ground state is found using a Non linear Krylov Newton method. Updating the chemical potential along the simulations does not seem to work in spherical coordinates ( why ? , have tried different implementations yielding the same result  and tested each step ). Opted out for fixing the chemical potential insted of particle number. The ground state is found trough propagation in imaginary time follower by a non linear Newton-Krilov solver.
-Can obtain very small accuracy. For $g=100,N=1000,mu=15,R=10$ I get accuracy $||(H-\mu)\psi||<1e-9 $.
+Can obtain very small accuracy. For $g=100,N=1000,\mu=15,R=10$ I get accuracy $||(H-\mu)\psi||<1e-9 $.
+## BdG
+### Harmonic oscillator 1D
+Solution is sensible to space step for high energy excitations, where the function becomes very wiggly and it becomes difficult to resolve the ery fast oscillations
+| ![image](BdG/energy-1d-harmonic-oscillator.png ) |
+|:--:|
+|relative-energy-difference: Relative energy difference between numerical and exact energy of excited state n obtained by exact diagonalization  |
+| ![image](BdG/1d-ho-excitedn5.png ) |
+|:--:|
+|excited-state-n5: Wavefunction of harmonic oscillator with 500 discretization points, state n=5 obtained by exact diagonalization. Dashed lines are results from exact diagonalization.   |
+| ![image](BdG/1d-ho-excitedn80.png ) |
+|:--:|
+|excited-state-n80: Wavefunction of harmonic oscillator with 500 discretization points, state n=80 obtained by exact diagonalization.   |
+
+
 ## Modeling
-A toy model for 
+### Initial dynamics
+It is likely a non linear instability. Is not captured using linear response. Possible theories:
+- Lyapunov function method
+
+### Late time dynamics
 - Liquid droplet model
 - Scattering homogeneous or attraction between droplets
-- Model for the initial quench
 - Tracking : region_props, just merge labels when isosurfaces merge 
