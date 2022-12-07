@@ -9,12 +9,11 @@ $$\hbar \omega
 \begin{pmatrix}
 u \\ 
 v
-\end{pmatrix}
+\end{pmatrix}=
 \begin{pmatrix}
 H_0 - \mu + 2g\phi_0^2 & g\phi_0^2 \\
 -g\phi_0^2 & -(H_0 - \mu + 2g\phi_0^2) \\
 \end{pmatrix}
-=
 \begin{pmatrix}
 u \\ 
 v
@@ -31,8 +30,8 @@ The quantity $\omega(k)$ also sets the growth rate of the condensate.
 ## Linearization of the Petrov equation
 The petrov equation is given by $$i\hbar\frac{\partial \phi}{\partial t}=\left( \frac{-\hbar^2}{2m}  \nabla^2 + V(r) -3|\phi|^2 + \frac{5}{2}|\phi|^3  - \mu\right)\phi $$
 By reapeating the process for the GP equation one gets
-$$ \hbar \omega u_i = \left(H_0 - \mu + \frac{5}{2}\phi_0^3 - \frac{9}{4}\phi_0^2\right)u_i + \left( \frac{3}{4}\phi_0^2 \right)v_i $$
-$$ -\hbar \omega v_i = \left(H_0 - \mu + \frac{5}{2}\phi_0^3 - \frac{9}{4}\phi_0^2\right)v_i + \left( \frac{3}{4}\phi_0^2 \right)u_i $$
+$$\hbar \omega u_i = \left(H_0 - \mu + \frac{5}{2}\phi_0^3 - \frac{9}{4}\phi_0^2\right)u_i + \left( \frac{3}{4}\phi_0^2 \right)v_i $$
+$$-\hbar \omega v_i = \left(H_0 - \mu + \frac{5}{2}\phi_0^3 - \frac{9}{4}\phi_0^2\right)v_i + \left( \frac{3}{4}\phi_0^2 \right)u_i $$
 Using $\mu = -3n +\frac{5}{2}n^{3/2}$ for an homogeneous system we get the spectrum
 $$\hbar\omega=\sqrt{ \left(\frac{\hbar^2k^2}{2m}\right)^2 + \frac{\hbar^2 k^2}{m}\frac{3}{4}n} $$
 There is not a maximum in the energy spectrum. The formation of droplets cannot be obtained at linear order.
@@ -61,4 +60,4 @@ It is likely a non linear instability. Is not captured using linear response. Po
 ### Late time dynamics
 - Liquid droplet model
 - Scattering homogeneous or attraction between droplets
-- Tracking : region_props, just merge labels when isosurfaces merge 
+- Tracking : region_props, just merge labels when isosurfaces merge
