@@ -51,7 +51,28 @@ Solution is sensible to space step for high energy excitations, where the functi
 |:--:|
 |excited-state-n80: Wavefunction of harmonic oscillator with 500 discretization points, state n=80 obtained by exact diagonalization.   |
 
+Similar results are obtained when considering an harmonic oscillator in 3D, getting agreements at low energy with $E_n = \hbar\omega(2n + l )$ where $l=0$
+### Single component GP - Thomas Fermi Limit
+in 3D the Thomas Fermi approximation yields the density profile
+$$n(r)=n(0)\left(1 - V(r) \right)$$
+$$n(0)=\frac{m\omega^2R^2}{2g}$$
+$$R=\left( \frac{15}{4\pi} \frac{g}{m\omega^2}N\right)^{1/5}$$
+ ![image]( BdG/TFgs-mu200g100.png) |
+|:--:|
+|TF-profile: Density for $\mu=200$ ,$g=200$ ,$n=1000$. a) GS is the numerical ground state of the GP equation , b) Thoams Fermi density profile  |
 
+ ![image]( BdG/energy-spectrum-TF.png) |
+|:--:|
+|TF-profile: Excited states  for $\mu=200$ ,$g=200$ ,$n=1000$. a) GS is the numerical ground state of the GP equation , b) Thomas Fermi density profile  |
+
+At low energy TF and numerical BdG agree for low energy excitation. High energy deviations are due in part because the TF limit is only approximate and in part because ground state is very wiggly and the resolution of the grid is not sufficient to resolve the excited states.
+![image]( BdG/BdG-excitedn50.png) |
+|:--:|
+|TF-profile: Excited state $n=50$ for $\mu=200$ ,$g=200$ ,$n=1000$. a) $u(r)$ Bogoliubov function b) $v(r)$ Bogoliubov function.
+### Dynamic structure factor
+Is defined as
+$$ S(q,\omega)=\sum_n |<n| e^{iq\cdot r} |0 >  |^2 \delta(\omega- E_{n})$$ 
+and can be computed once the eigenstates are known.
 ## Modeling
 ### Initial dynamics
 It is likely a non linear instability. Is not captured using linear response. Possible theories:
