@@ -120,7 +120,7 @@ def plot_S(S,q,omega,mu=None):
 ![image](BdG/S_LDA_GP.png)
 |Dynamical structure factor $S(q,\omega)$ for g=100 and N=1000 in harmonic oscillator units.
 
-The integration can be performed numerically and one obtains similar results.
+The integration can be performed numerically and I tested it on a Thomas Fermi profile and get the same estimate
 ```python
 from scipy.optimize import brentq
 def epsilon(q,n,g):
