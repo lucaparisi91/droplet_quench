@@ -120,5 +120,32 @@ def plot_S(S,q,omega,mu=None):
 ![image](BdG/S_LDA_GP.png)
 |Dynamical structure factor $S(q,\omega)$ for g=100 and N=1000 in harmonic oscillator units.
 
+The integration can be performed numerically and one obtains similar results.
+```python
+from scipy.optimize import brentq
+def epsilon(q,n,g):
+    return np.sqrt(q**2/2*(q**2/2 + 2*g*n))
+def dynamicStructureFactor( epsi, q, omega,density,r,maxN=10000):
+    if omega <= epsi(q,0):
+        return 0
+    try:
+        n=brentq(lambda n : epsi(q,n) - omega ,0,maxN)
+    except ValueError:
+        return 0
+    if n > np.max(density):
+        return 0
+    i=np.argmin(np.abs(density-n))
+    
+    if i ==0 or i==len(r)-1:
+        return 0
+    
+    dr=r[1] - r[0]
+    depsidr=(epsi(q,density[i+1] ) - epsi(q,density[i-1 ] ))/(2*dr)
+    depsidr=np.abs(depsidr)
+    S=np.pi*4*r[i]**2*density[i]*q**2*0.5/omega*1/depsidr
+    return( S)
+```
+
+
 [dynamic-stringari]: https://journals.aps.org/pra/pdf/10.1103/PhysRevA.61.063608
 
