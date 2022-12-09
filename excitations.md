@@ -69,16 +69,56 @@ At low energy TF and numerical BdG agree for low energy excitation. High energy 
 ![image]( BdG/BdG-excitedn50.png) |
 |:--:|
 |TF-profile: Excited state $n=50$ for $\mu=200$ ,$g=200$ ,$n=1000$. a) $u(r)$ Bogoliubov function b) $v(r)$ Bogoliubov function.
-### Dynamic structure factor
-Is defined as
+## Dynamic structure factor
+Is defined as [[F.Zambelli et al 2000]][dynamic-stringari]
 $$ S(q,\omega)=\sum_n |<n| e^{iq\cdot r} |0 >  |^2 \delta(\omega- E_{n})$$ 
-and can be computed once the eigenstates are known.
-## Modeling
-### Initial dynamics
-It is likely a non linear instability. Is not captured using linear response. Possible theories:
-- Lyapunov function method
+and can be computed once the eigen-states are known. For BdG excited states this takes the form 
+$$<n|\rho_q|0>=\int (u^*(r) + v^*(r) )e^{iq\cdot r}\psi_0(r)$$ 
+For an uniform system one gets
+$$u_p(r)=Ue^{ip\cdot r}$$
+$$u_p(r)=Ve^{ip\cdot r}$$
+If the system is described by an uniform GP equation one gets 
+$$<n|\rho_q|0>=\delta_{k_n ,q}(U + V)$$
+with 
+$$(U+V)^2=\frac{p^2}{2m\epsilon(p) }$$
+Hence
+$$S(q,\omega)=\frac{q^2}{2m\epsilon_q}\delta(\hbar\omega - \epsilon(q) )$$
+The same formula applies for the Petrov equation in an uniform system although with a different $\epsilon(q)$. Indeed the relationship above is quite general if one assumes the energy spectrum to be a dirac distribution and neglects states in a broad continuum.
+In the LDA approximation the dynamic structure factor takes the form
+$$S_{LDA}=\int n(r)\delta(\hbar \omega - e(n(r),q) )\frac{q^2}{2m\epsilon(n(r),q)}$$ 
+For a single component Bose gas in a trap the equations take the form
+$$S(q,\omega)=\frac{15}{8}\frac{\omega^2 - E_r^2}{E_r \mu^2}\sqrt{1 - \frac{\omega^2 - E_r^2}{2E_r\mu}}$$
+with
+$\mu=(15N\frac{a}{a_{ho}})^{2/5}\hbar\omega_0$ , $\omega_0$ the frequency of the harmonic oscillator.
+The value is non zero only between the recoil energy $E_{min}=E_r$ and  $E_{max}=E_r\sqrt{1+2\mu/E_r}$.<br>
+At large momentum transfers $E_{max}-E_{min}\rightarrow \mu$ . 
+```python
+def plot_S(S,q,omega,mu=None):
+    """
+    S : array with dynamic structure values
+    q: transferred momenta axis , 1D array
+    omega : energy axis, 1D array
+    """
+    q_labels=["{:.2f}".format(_q) for _q in q]
+    omega_labels=["{:.2f}".format(_omega) for _omega in omega]
 
-### Late time dynamics
-- Liquid droplet model
-- Scattering homogeneous or attraction between droplets
-- Tracking : region_props, just merge labels when isosurfaces merge
+    S_data=pd.DataFrame(data=S.transpose(),index=omega_labels,columns=q_labels)
+    ax=sns.heatmap(S_data,xticklabels=len(q)//5,yticklabels=len(omega)//5)
+    #ax=sns.heatmap(S_data)
+
+    ax.axes.invert_yaxis()
+    sns.lineplot(x=q/np.max(q)*len(q), y=0.5*q**2/np.max(omega)*len(omega),color="r" ,label="recoil energy")
+    Er=q**2/2
+    if mu is not None:
+            sns.lineplot(x=q/np.max(q)*len(q), y=(Er * np.sqrt(1+2*mu/Er) )/np.max(omega)*len(omega),color="g" ,
+                         label=r"$E_r\sqrt{1+2\mu/E_r}$")
+
+    plt.xlabel(r"$q$")
+    plt.ylabel(r"$\omega$")
+
+```
+![image](BdG/S_LDA_GP.png)
+|Dynamical structure factor $S(q,\omega)$ for g=100 and N=1000 in harmonic oscillator units.
+
+[dynamic-stringari]: https://journals.aps.org/pra/pdf/10.1103/PhysRevA.61.063608
+
