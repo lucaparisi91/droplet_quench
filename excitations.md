@@ -161,3 +161,4 @@ In a spherically symmetric system in space representation the accuracy seems to 
 |Density of states versus TF density of states. The differences are likely due to numerical inaccuracy and not beyond Thomas Fermi effects.
 ![image](BdG/S_omega_noisy.png)
 | The dynamic structure factor is very noisy and cannot be trusted at all. Slice for a finite effect of the wavevector $q$.
+Suggests the need for a more accurate numerical method ( harmonic oscillator basis expansion maybe, gaussian quadrature with some polynomials ? )
