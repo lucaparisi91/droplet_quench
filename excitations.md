@@ -74,6 +74,8 @@ Is defined as [[F.Zambelli et al 2000]][dynamic-stringari]
 $$ S(q,\omega)=\sum_n |<n| e^{iq\cdot r} |0 >  |^2 \delta(\omega- E_{n})$$ 
 and can be computed once the eigen-states are known. For BdG excited states this takes the form 
 $$<n|\rho_q|0>=\int (u^*(r) + v^*(r) )e^{iq\cdot r}\psi_0(r)$$ 
+If the system is spherically symmetric one gets
+$$<n|\rho_q|0>=4\pi\int_0^\infty \left( u^*(r) + v^*(r)\right) \frac{r}{q}\psi_0(r)\sin{(qr)} dr $$
 For an uniform system one gets
 $$u_p(r)=Ue^{ip\cdot r}$$
 $$u_p(r)=Ve^{ip\cdot r}$$
@@ -92,6 +94,7 @@ with
 $\mu=(15N\frac{a}{a_{ho}})^{2/5}\hbar\omega_0$ , $\omega_0$ the frequency of the harmonic oscillator.
 The value is non zero only between the recoil energy $E_{min}=E_r$ and  $E_{max}=E_r\sqrt{1+2\mu/E_r}$.<br>
 At large momentum transfers $E_{max}-E_{min}\rightarrow \mu$ . 
+
 ```python
 def plot_S(S,q,omega,mu=None):
     """
@@ -146,6 +149,15 @@ def dynamicStructureFactor( epsi, q, omega,density,r,maxN=10000):
     return( S)
 ```
 
-
 [dynamic-stringari]: https://journals.aps.org/pra/pdf/10.1103/PhysRevA.61.063608
 
+## Computation of the $S(q,\omega)$ from the numerical bogoliubov mode
+Numerically the dynamic structure factor can be computed as 
+$$ S(q,\omega_n )= |<n | \rho_q | 0 >|^2 d(e_n) $$
+where $d(e)=\left(\frac{d\epsilon}{dn}\right)^{-1}$ is the numerically computed (finite difference) density of states.
+In a spherically symmetric system in space representation the accuracy seems to be too low. The signal is very noisy and accuracy is poor.
+
+![image](BdG/dos-TF.png)
+|Density of states versus TF density of states. The differences are likely due to numerical inaccuracy and not beyond Thomas Fermi effects.
+![image](BdG/S_omega_noisy.png)
+| The dynamic structure factor is very noisy and cannot be trusted at all. Slice for a finite effect of the wavevector $q$.
