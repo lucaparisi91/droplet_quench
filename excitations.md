@@ -162,3 +162,32 @@ In a spherically symmetric system in space representation the accuracy seems to 
 ![image](BdG/S_omega_noisy.png)
 | The dynamic structure factor is very noisy and cannot be trusted at all. Slice for a finite effect of the wavevector $q$.
 Suggests the need for a more accurate numerical method ( harmonic oscillator basis expansion maybe, gaussian quadrature with some polynomials ? )
+
+### BdG spherically symmetric
+The GP equation can be written in spherically symmetric systems using $\psi(r)=R(r)Y_{lm}(\theta,\phi)$ . Redefining $u(r)=rR(r)$ one gets the equation 
+$$
+\left( -\frac{\hbar^2}{2m}  \frac{d^2}{dr^2} + V(r) + \frac{\hbar^2l(l+1)}{2mr^2} +  \frac{g}{r^2} u^2(r)  - \mu\right)u(r)=0
+$$
+with boundary conditions $u(r)=0$ and $u(R)=0$ . Note this case only works for a bound system (density equal to zero at the edges of the sphere). If $g=0$ the solutions are
+$$
+u(r) \propto r^{l+1}L_k^{(l+1/2)}( (r/a_{ho})^2)e^{-\frac{r^2}{2a^2} }
+$$
+$$
+\mu = \hbar\omega(2k + l + \frac{3}{2})
+$$
+where $L_n^m$ are generalized Laguerre polynomials.
+
+![image](BdG/ho-laguerre-k30.png)
+| Example of the radial part of the wavefunction for quantum number $k=30$ and $l=0$ .
+We now choose for the matrix elements for $q_n=\frac{n\pi}{R}$ which corresponds to a node being present in both $r=0$ and $r=R$
+
+
+![image](BdG/S_discrete_ho.png )
+| $ | < n | q | 0> |^2$ heat map. Do not multiply hear for the density of states. The energies are discrete. Matrix elements seem to peak whew the recoil energy is equal to $\omega$.<br>
+Numerically the wavefunctions start to differ for 1000 grid points and $R=30a_{ho}$ for $k\approx 100$.
+![image](BdG/ho-laguerre-k100-numerical.png )
+In the TF regime $g=100$ and $\mu=200$ one gets the dynamic structure factor below. Note that I do not take the thermodynamic limit. Hence I do not compute the density of states and take $S(q,\omega_n)=|<n|\rho_q | 0>|^2$ and only consider $l=0$ states.
+![image](BdG/S_TF_mu200_g100_heatmap.png )
+$S(q,\omega)$ has different peaks at different values of $q$ ( why, which momenta ? ). Below a plot of $S(q,\omega)$ in units of $a_{ho}$ corresponding to the monopole frequency.
+![image](BdG/S_TF_mu200_g100_monopole.png )
+
